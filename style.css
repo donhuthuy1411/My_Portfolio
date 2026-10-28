@@ -25,10 +25,26 @@ html {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: var(--background);
+  background: linear-gradient(135deg, #f5f7ff, #ffffff, #edf4ff, #f5f7ff);
+  background-size: 300% 300%;
+  animation: backgroundMove 15s ease infinite;
   color: var(--text);
   line-height: 1.7;
   font-size: 16px;
+}
+
+@keyframes backgroundMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 a {
@@ -72,34 +88,54 @@ nav > a {
   white-space: nowrap;
 }
 
-/* Danh sách liên kết */
+/* Các liên kết menu */
 
 nav div {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 nav div a {
+  display: inline-block;
+  padding: 9px 15px;
+  border: 1px solid transparent;
+  border-radius: 10px;
   color: var(--text);
   font-size: 15px;
-  font-weight: 600;
-  transition: color 0.2s;
+  font-weight: 400;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-nav div a:hover,
-nav div a.active {
+/* Tab đang mở */
+
+nav a.active {
+  color: var(--primary) !important;
+  background: var(--light-blue);
+  border-color: #c9dbff;
+  font-weight: 700 !important;
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.08);
+}
+
+nav div a:hover {
   color: var(--primary);
+  background: #f0f5ff;
 }
 
-/* Xóa dấu chấm nếu menu dùng ul, li */
+/* Xóa dấu chấm nếu menu dùng ul/li */
 
 nav ul {
-  list-style: none;
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 nav li {
@@ -108,24 +144,29 @@ nav li {
 }
 
 /* =========================
-   3. KHU VỰC NỘI DUNG
+   3. NỘI DUNG CHÍNH
 ========================= */
 
 main {
   max-width: 1150px;
   min-height: 75vh;
   margin: 0 auto;
-  padding: 48px 24px;
+  padding: 40px 24px 60px;
 }
 
 section {
-  margin-bottom: 36px;
+  margin-bottom: 42px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.3;
 }
 
 h1 {
   color: #1d2b45;
   font-size: clamp(30px, 4vw, 42px);
-  line-height: 1.3;
   margin-bottom: 18px;
 }
 
@@ -133,6 +174,11 @@ h2 {
   color: #1d2b45;
   font-size: 27px;
   margin-bottom: 16px;
+}
+
+section h2 {
+  padding-left: 13px;
+  border-left: 4px solid var(--primary);
 }
 
 h3 {
@@ -154,15 +200,27 @@ li {
 }
 
 /* =========================
-   4. TRANG CHỦ
+   4. PHẦN GIỚI THIỆU
 ========================= */
 
 .hero {
-  background: linear-gradient(135deg, #eaf1ff, #ffffff);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 55px 42px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, #e4edff, #ffffff 75%);
+  border: 1px solid #dce6fb;
+  border-radius: 22px;
+  padding: 55px 45px;
   margin-bottom: 35px;
+}
+
+.hero h1::after {
+  content: "";
+  display: block;
+  width: 65px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 5px;
+  margin-top: 15px;
 }
 
 .hero p {
@@ -179,12 +237,15 @@ li {
   display: inline-block;
   padding: 11px 21px;
   margin: 5px 8px 5px 0;
-  border-radius: 9px;
   border: 1px solid var(--primary);
+  border-radius: 9px;
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
 }
 
 .btn-primary {
@@ -195,7 +256,6 @@ li {
 .btn-primary:hover {
   background: var(--primary-dark);
   color: white;
-  transform: translateY(-2px);
 }
 
 .btn-outline {
@@ -206,6 +266,11 @@ li {
 .btn-outline:hover {
   background: var(--light-blue);
   color: var(--primary-dark);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(56, 103, 214, 0.2);
 }
 
 /* =========================
@@ -220,18 +285,21 @@ li {
 }
 
 .project-card {
-  background: var(--white);
-  padding: 25px;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 28px;
   border: 1px solid var(--border);
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(30, 50, 90, 0.04);
-  transition: 0.25s ease;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(35, 65, 120, 0.06);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(30, 50, 90, 0.09);
-  border-color: #b7cbff;
+  transform: translateY(-7px);
+  border-color: #9db8ff;
+  box-shadow: 0 14px 30px rgba(56, 103, 214, 0.13);
 }
 
 .project-card p {
@@ -251,8 +319,9 @@ li {
   display: inline-block;
   background: var(--light-blue);
   color: #244db0;
+  border: 1px solid #d8e5ff;
   border-radius: 20px;
-  padding: 5px 12px;
+  padding: 6px 13px;
   font-size: 13px;
   font-weight: 600;
 }
@@ -306,191 +375,18 @@ form textarea {
 ========================= */
 
 footer {
+  margin-top: 20px;
+  padding: 26px 20px;
   background: var(--white);
   border-top: 1px solid var(--border);
   color: var(--text-light);
   text-align: center;
-  padding: 22px;
   font-size: 14px;
 }
 
 /* =========================
-   9. ĐIỆN THOẠI / MÀN HÌNH NHỎ
+   9. HIỆU ỨNG HIỆN KHI CUỘN
 ========================= */
-
-@media (max-width: 760px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 15px 20px;
-  }
-
-  nav div,
-  nav ul {
-    gap: 12px 18px;
-  }
-
-  main {
-    padding: 30px 18px;
-  }
-
-  .hero {
-    padding: 32px 22px;
-  }
-
-  .project-grid {
-    grid-template-columns: 1fr;
-  }
-
-  form {
-    padding: 20px;
-  }
-}
-
-/* Làm nền website sinh động hơn */
-body {
-  background:
-    radial-gradient(ellipse at 5% 5%, #e5edff 0, transparent 35%), #f5f7fb;
-}
-
-/* Tạo khoảng cách nội dung hợp lý */
-main {
-  padding-top: 40px;
-  padding-bottom: 60px;
-}
-
-/* Làm nổi bật phần giới thiệu */
-.hero {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(120deg, #e4edff, #ffffff 75%);
-  border: 1px solid #dce6fb;
-  border-radius: 22px;
-  padding: 55px 45px;
-  margin-bottom: 35px;
-}
-
-/* Đường nhấn màu xanh phía trên tiêu đề */
-.hero h1 {
-  position: relative;
-}
-
-.hero h1::after {
-  content: "";
-  display: block;
-  width: 65px;
-  height: 4px;
-  background: #3867d6;
-  border-radius: 5px;
-  margin-top: 15px;
-}
-
-/* Các thẻ nội dung */
-.project-card {
-  padding: 28px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 8px 25px rgba(35, 65, 120, 0.06);
-  transition:
-    transform 0.25s,
-    box-shadow 0.25s;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 14px 30px rgba(35, 65, 120, 0.12);
-}
-
-/* Tiêu đề các khu vực */
-section h2 {
-  padding-left: 13px;
-  border-left: 4px solid #3867d6;
-}
-
-/* Khoảng cách giữa các nhóm nội dung */
-section {
-  margin-bottom: 45px;
-}
-
-/* Nhãn kỹ năng */
-.tag {
-  padding: 6px 13px;
-  background: #eaf1ff;
-  color: #244db0;
-  border: 1px solid #d8e5ff;
-}
-
-/* Chân trang */
-footer {
-  margin-top: 20px;
-  padding: 26px 20px;
-  background: #ffffff;
-  border-top: 1px solid #e1e8f3;
-}
-
-/* Hiển thị tốt trên điện thoại */
-@media (max-width: 700px) {
-  .hero {
-    padding: 32px 24px;
-  }
-
-  section {
-    margin-bottom: 32px;
-  }
-}
-
-/* ===== NỀN CHUYỂN ĐỘNG NHẸ ===== */
-
-body {
-  background: linear-gradient(135deg, #f5f7ff, #ffffff, #edf4ff, #f5f7ff);
-  background-size: 300% 300%;
-  animation: backgroundMove 15s ease infinite;
-}
-
-@keyframes backgroundMove {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* ===== NÚT BẤM CÓ HIỆU ỨNG ===== */
-
-.btn {
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background-color 0.25s ease;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(56, 103, 214, 0.2);
-}
-
-/* ===== THẺ KỸ NĂNG, DỰ ÁN ===== */
-
-.project-card {
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-7px);
-  border-color: #9db8ff;
-  box-shadow: 0 14px 30px rgba(56, 103, 214, 0.13);
-}
-
-/* ===== NỘI DUNG HIỆN RA KHI CUỘN ===== */
 
 .reveal {
   opacity: 0;
@@ -505,33 +401,9 @@ body {
   transform: translateY(0);
 }
 
-/* ===== MENU CÓ HIỆU ỨNG ===== */
-
-nav a {
-  transition: color 0.2s ease;
-}
-
-nav div a {
-  position: relative;
-}
-
-nav div a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -5px;
-  width: 0;
-  height: 2px;
-  background: #3867d6;
-  transition: width 0.25s ease;
-}
-
-nav div a:hover::after,
-nav div a.active::after {
-  width: 100%;
-}
-
-/* ===== NÚT QUAY LẠI ĐẦU TRANG ===== */
+/* =========================
+   10. NÚT QUAY LẠI ĐẦU TRANG
+========================= */
 
 #backToTop {
   position: fixed;
@@ -541,7 +413,7 @@ nav div a.active::after {
   height: 46px;
   border: none;
   border-radius: 50%;
-  background: #3867d6;
+  background: var(--primary);
   color: white;
   font-size: 22px;
   cursor: pointer;
@@ -560,8 +432,45 @@ nav div a.active::after {
 }
 
 #backToTop:hover {
-  background: #244db0;
+  background: var(--primary-dark);
   transform: translateY(-3px);
+}
+
+/* =========================
+   11. MÀN HÌNH NHỎ
+========================= */
+
+@media (max-width: 760px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+  nav div,
+  nav ul {
+    gap: 8px;
+  }
+
+  nav div a {
+    padding: 8px 11px;
+  }
+
+  main {
+    padding: 30px 18px;
+  }
+
+  .hero {
+    padding: 32px 24px;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  form {
+    padding: 20px;
+  }
 }
 
 /* Tôn trọng cài đặt giảm chuyển động của người dùng */
@@ -579,30 +488,4 @@ nav div a.active::after {
     opacity: 1;
     transform: none;
   }
-}
-
-/* Tab đang được chọn */
-nav div a.active {
-  color: #2563eb;
-  background-color: #eaf1ff;
-  border-radius: 8px;
-  padding: 8px 13px;
-  position: relative;
-}
-
-/* Gạch chân tab đang chọn */
-nav div a.active::after {
-  content: "";
-  position: absolute;
-  left: 13px;
-  right: 13px;
-  bottom: 3px;
-  height: 2px;
-  background-color: #2563eb;
-  border-radius: 5px;
-}
-
-/* Hiệu ứng khi rê chuột */
-nav div a:hover {
-  color: #2563eb;
 }

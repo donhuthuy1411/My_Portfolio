@@ -1,23 +1,17 @@
 /* 1. Làm nổi bật tab của trang hiện tại */
 
-const tenTrang = window.location.pathname.split("/").pop().toLowerCase();
+const trangHienTai =
+  window.location.pathname.split("/").pop().toLowerCase() || "index.html";
 
-const cacLienKetMenu = document.querySelectorAll("nav a");
+document.querySelectorAll("nav a[href]").forEach(function (link) {
+  const duongDan = link.getAttribute("href").split("?")[0].toLowerCase();
+  const tenFile = duongDan.split("/").pop();
 
-cacLienKetMenu.forEach(function (lienKet) {
-  const duongDan = lienKet.getAttribute("href");
-
-  if (!duongDan) {
-    return;
-  }
-
-  const trangLienKet = duongDan.split("/").pop().toLowerCase();
-
-  if (trangLienKet === (tenTrang || "index.html")) {
-    lienKet.classList.add("active");
-  } else {
-    lienKet.classList.remove("active");
-  }
+  link.classList.toggle(
+    "active",
+    tenFile === trangHienTai ||
+      (trangHienTai === "" && tenFile === "index.html"),
+  );
 });
 
 /* 2. Hiện nội dung khi cuộn trang */

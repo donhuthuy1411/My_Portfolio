@@ -346,3 +346,95 @@ footer {
     padding: 20px;
   }
 }
+
+/* Làm nền website sinh động hơn */
+body {
+  background:
+    radial-gradient(ellipse at 5% 5%, #e5edff 0, transparent 35%), #f5f7fb;
+}
+
+/* Tạo khoảng cách nội dung hợp lý */
+main {
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
+/* Làm nổi bật phần giới thiệu */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, #e4edff, #ffffff 75%);
+  border: 1px solid #dce6fb;
+  border-radius: 22px;
+  padding: 55px 45px;
+  margin-bottom: 35px;
+}
+
+/* Đường nhấn màu xanh phía trên tiêu đề */
+.hero h1 {
+  position: relative;
+}
+
+.hero h1::after {
+  content: "";
+  display: block;
+  width: 65px;
+  height: 4px;
+  background: #3867d6;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+/* Các thẻ nội dung */
+.project-card {
+  padding: 28px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 25px rgba(35, 65, 120, 0.06);
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(35, 65, 120, 0.12);
+}
+
+/* Tiêu đề các khu vực */
+section h2 {
+  padding-left: 13px;
+  border-left: 4px solid #3867d6;
+}
+
+/* Khoảng cách giữa các nhóm nội dung */
+section {
+  margin-bottom: 45px;
+}
+
+/* Nhãn kỹ năng */
+.tag {
+  padding: 6px 13px;
+  background: #eaf1ff;
+  color: #244db0;
+  border: 1px solid #d8e5ff;
+}
+
+/* Chân trang */
+footer {
+  margin-top: 20px;
+  padding: 26px 20px;
+  background: #ffffff;
+  border-top: 1px solid #e1e8f3;
+}
+
+/* Hiển thị tốt trên điện thoại */
+@media (max-width: 700px) {
+  .hero {
+    padding: 32px 24px;
+  }
+
+  section {
+    margin-bottom: 32px;
+  }
+}

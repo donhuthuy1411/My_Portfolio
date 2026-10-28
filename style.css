@@ -580,3 +580,29 @@ nav div a.active::after {
     transform: none;
   }
 }
+
+/* Tab đang được chọn */
+nav div a.active {
+  color: #2563eb;
+  background-color: #eaf1ff;
+  border-radius: 8px;
+  padding: 8px 13px;
+  position: relative;
+}
+
+/* Gạch chân tab đang chọn */
+nav div a.active::after {
+  content: "";
+  position: absolute;
+  left: 13px;
+  right: 13px;
+  bottom: 3px;
+  height: 2px;
+  background-color: #2563eb;
+  border-radius: 5px;
+}
+
+/* Hiệu ứng khi rê chuột */
+nav div a:hover {
+  color: #2563eb;
+}

@@ -489,3 +489,138 @@ footer {
     transform: none;
   }
 }
+
+/* ===== 1. Tiêu đề xuất hiện khi mở trang ===== */
+
+.hero h1 {
+  animation: titleAppear 0.8s ease both;
+}
+
+.hero p {
+  animation: titleAppear 0.8s ease 0.2s both;
+}
+
+.hero .btn {
+  animation: titleAppear 0.8s ease 0.4s both;
+}
+
+@keyframes titleAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== 2. Thẻ dự án xuất hiện so le ===== */
+
+.project-card:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.project-card:nth-child(2) {
+  transition-delay: 0.08s;
+}
+
+.project-card:nth-child(3) {
+  transition-delay: 0.16s;
+}
+
+.project-card:nth-child(4) {
+  transition-delay: 0.24s;
+}
+
+/* ===== 3. Nút bấm có phản hồi ===== */
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+/* ===== 4. Vệt sáng chạy qua thẻ khi rê chuột ===== */
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.65),
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+.project-card:hover::before {
+  animation: shine 0.8s ease;
+}
+
+@keyframes shine {
+  from {
+    left: -120%;
+  }
+
+  to {
+    left: 150%;
+  }
+}
+
+/* ===== 5. Nút quay lại đầu trang nổi nhẹ ===== */
+
+#backToTop.show {
+  animation:
+    buttonAppear 0.35s ease both,
+    floatButton 2s ease-in-out 0.35s infinite;
+}
+
+@keyframes buttonAppear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatButton {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -4px;
+  }
+}
+
+/* Tắt chuyển động nếu người dùng yêu cầu giảm animation */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

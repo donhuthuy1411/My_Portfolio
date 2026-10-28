@@ -438,3 +438,145 @@ footer {
     margin-bottom: 32px;
   }
 }
+
+/* ===== NỀN CHUYỂN ĐỘNG NHẸ ===== */
+
+body {
+  background: linear-gradient(135deg, #f5f7ff, #ffffff, #edf4ff, #f5f7ff);
+  background-size: 300% 300%;
+  animation: backgroundMove 15s ease infinite;
+}
+
+@keyframes backgroundMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ===== NÚT BẤM CÓ HIỆU ỨNG ===== */
+
+.btn {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(56, 103, 214, 0.2);
+}
+
+/* ===== THẺ KỸ NĂNG, DỰ ÁN ===== */
+
+.project-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-7px);
+  border-color: #9db8ff;
+  box-shadow: 0 14px 30px rgba(56, 103, 214, 0.13);
+}
+
+/* ===== NỘI DUNG HIỆN RA KHI CUỘN ===== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== MENU CÓ HIỆU ỨNG ===== */
+
+nav a {
+  transition: color 0.2s ease;
+}
+
+nav div a {
+  position: relative;
+}
+
+nav div a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: #3867d6;
+  transition: width 0.25s ease;
+}
+
+nav div a:hover::after,
+nav div a.active::after {
+  width: 100%;
+}
+
+/* ===== NÚT QUAY LẠI ĐẦU TRANG ===== */
+
+#backToTop {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 50%;
+  background: #3867d6;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 5px 16px rgba(56, 103, 214, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: 0.25s ease;
+  z-index: 999;
+}
+
+#backToTop.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#backToTop:hover {
+  background: #244db0;
+  transform: translateY(-3px);
+}
+
+/* Tôn trọng cài đặt giảm chuyển động của người dùng */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

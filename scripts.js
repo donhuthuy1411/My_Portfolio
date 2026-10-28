@@ -49,3 +49,63 @@ if (contactForm && formStatus) {
     contactForm.reset();
   });
 }
+
+/* ===== HIỆU ỨNG HIỆN NỘI DUNG KHI CUỘN ===== */
+
+const cacPhanTu = document.querySelectorAll(
+  "main h1, main h2, main .hero, main .project-card, main section",
+);
+
+cacPhanTu.forEach(function (phanTu) {
+  phanTu.classList.add("reveal");
+});
+
+if ("IntersectionObserver" in window) {
+  const boQuanSat = new IntersectionObserver(
+    function (danhSach) {
+      danhSach.forEach(function (muc) {
+        if (muc.isIntersecting) {
+          muc.target.classList.add("visible");
+          boQuanSat.unobserve(muc.target);
+        }
+      });
+    },
+    {
+      threshold: 0.12,
+    },
+  );
+
+  cacPhanTu.forEach(function (phanTu) {
+    boQuanSat.observe(phanTu);
+  });
+} else {
+  cacPhanTu.forEach(function (phanTu) {
+    phanTu.classList.add("visible");
+  });
+}
+
+/* ===== TẠO NÚT QUAY LẠI ĐẦU TRANG ===== */
+
+const nutLenDau = document.createElement("button");
+
+nutLenDau.id = "backToTop";
+nutLenDau.type = "button";
+nutLenDau.textContent = "↑";
+nutLenDau.setAttribute("aria-label", "Quay lại đầu trang");
+
+document.body.appendChild(nutLenDau);
+
+window.addEventListener("scroll", function () {
+  if (window.scrollY > 300) {
+    nutLenDau.classList.add("show");
+  } else {
+    nutLenDau.classList.remove("show");
+  }
+});
+
+nutLenDau.addEventListener("click", function () {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});

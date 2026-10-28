@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Liên hệ với Nhựt Huy." />
+    <title>Contact | My Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar">
+        <a href="index.html" class="logo">MyPortfolio.</a>
+
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="cv.html">CV</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="page-container">
+      <section class="page-heading">
+        <p class="eyebrow">GET IN TOUCH</p>
+        <h1>Contact <span>Me</span></h1>
+        <p>Bạn có thể liên hệ với mình qua các kênh bên dưới.</p>
+      </section>
+
+      <section class="content-card">
+        <h2>Thông tin liên hệ</h2>
+
+        <p>
+          Nếu bạn muốn trao đổi về công nghệ, dự án học tập hoặc cơ hội hợp tác,
+          hãy liên hệ với mình.
+        </p>
+
+        <p>
+          <strong>Email:</strong>
+          <a href="mailto:donhuthuy17092021@gmail.com">
+            donhuthuy17092021@gmail.com
+          </a>
+        </p>
+
+        <p>
+          <strong>GitHub:</strong>
+          <a
+            href="https://github.com/donhuthuy1411"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            github.com/donhuthuy1411
+          </a>
+        </p>
+
+        <!-- <p>
+          <strong>LinkedIn:</strong>
+          <a
+            href="https://www.linkedin.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Tìm mình trên LinkedIn
+          </a>
+        </p> -->
+      </section>
+
+      <section class="content-card" style="margin-top: 24px">
+        <h2>Send a Message</h2>
+
+        <form id="contact-form">
+          <div class="form-group">
+            <label for="name">Họ và tên</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Nhập họ và tên"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="example@email.com"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Chủ đề</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Bạn muốn trao đổi về điều gì?"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Nội dung tin nhắn</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              placeholder="Viết tin nhắn của bạn..."
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Gửi tin nhắn</button>
+
+          <p id="form-status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="current-year"></span> My Portfolio</p>
+    </footer>
+  </body>
+</html>

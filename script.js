@@ -1,80 +1,84 @@
-/* 1. Làm nổi bật tab của trang hiện tại */
+// Đánh dấu mục menu tương ứng với phần đang hiển thị
+const navLinks = document.querySelectorAll(".nav-links a");
+const sections = document.querySelectorAll("main section[id]");
+const navContainer = document.getElementById("navLinks");
+const menuToggle = document.getElementById("menuToggle");
 
-const trangHienTai =
-  window.location.pathname.split("/").pop().toLowerCase() || "index.html";
+function setActiveLink(id) {
+  navLinks.forEach((link) => {
+    link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+  });
+}
 
-document.querySelectorAll("nav a[href]").forEach(function (link) {
-  const duongDan = link.getAttribute("href").split("?")[0].toLowerCase();
-  const tenFile = duongDan.split("/").pop();
-
-  link.classList.toggle(
-    "active",
-    tenFile === trangHienTai ||
-      (trangHienTai === "" && tenFile === "index.html"),
-  );
-});
-
-/* 2. Hiện nội dung khi cuộn trang */
-
-const cacPhanTu = document.querySelectorAll(
-  "main h1, main h2, main .hero, main .project-card, main section",
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) setActiveLink(entry.target.id);
+    });
+  },
+  { rootMargin: "-35% 0px -55% 0px" },
 );
 
-if ("IntersectionObserver" in window) {
-  const boQuanSat = new IntersectionObserver(
-    function (danhSach) {
-      danhSach.forEach(function (muc) {
-        if (muc.isIntersecting) {
-          muc.target.classList.add("visible");
-          boQuanSat.unobserve(muc.target);
-        }
-      });
-    },
-    {
-      threshold: 0.12,
-    },
+sections.forEach((section) => sectionObserver.observe(section));
+
+// Mở/đóng menu trên điện thoại
+menuToggle.addEventListener("click", () => {
+  const isOpen = navContainer.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+});
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    navContainer.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  });
+});
+
+// Hiệu ứng xuất hiện khi cuộn đến nội dung
+const revealObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.12 },
+);
+
+document.querySelectorAll(".reveal").forEach((element) => {
+  revealObserver.observe(element);
+});
+
+// Nút quay lại đầu trang
+const backToTop = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  backToTop.classList.toggle("show", window.scrollY > 350);
+});
+
+backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// Tự động cập nhật năm ở chân trang
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Form liên hệ: mở ứng dụng email đã cài trên máy
+const contactForm = document.getElementById("contactForm");
+const contactEmail = "donhuthuy17092021@gmail.com";
+
+contactForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const formData = new FormData(contactForm);
+  const subject = encodeURIComponent(
+    `Tin nhắn từ portfolio - ${formData.get("name")}`,
+  );
+  const body = encodeURIComponent(
+    `Họ tên: ${formData.get("name")}\nEmail: ${formData.get("email")}\n\nNội dung:\n${formData.get("message")}`,
   );
 
-  cacPhanTu.forEach(function (phanTu) {
-    phanTu.classList.add("reveal");
-    boQuanSat.observe(phanTu);
-  });
-} else {
-  cacPhanTu.forEach(function (phanTu) {
-    phanTu.classList.add("visible");
-  });
-}
-
-/* 3. Nút quay lại đầu trang */
-
-const nutLenDau = document.createElement("button");
-
-nutLenDau.id = "backToTop";
-nutLenDau.type = "button";
-nutLenDau.textContent = "↑";
-nutLenDau.setAttribute("aria-label", "Quay lại đầu trang");
-
-document.body.appendChild(nutLenDau);
-
-window.addEventListener("scroll", function () {
-  if (window.scrollY > 300) {
-    nutLenDau.classList.add("show");
-  } else {
-    nutLenDau.classList.remove("show");
-  }
+  window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
 });
-
-nutLenDau.addEventListener("click", function () {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-});
-
-/* 4. Cập nhật năm ở chân trang */
-
-const namHienTai = document.querySelector("#year");
-
-if (namHienTai) {
-  namHienTai.textContent = new Date().getFullYear();
-}

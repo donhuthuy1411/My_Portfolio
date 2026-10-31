@@ -65,7 +65,7 @@ backToTop.addEventListener("click", () => {
 // Tự động cập nhật năm ở chân trang
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Form liên hệ: mở ứng dụng email đã cài trên máy
+// Form liên hệ
 const contactForm = document.getElementById("contactForm");
 const contactEmail = "donhuthuy17092021@gmail.com";
 
